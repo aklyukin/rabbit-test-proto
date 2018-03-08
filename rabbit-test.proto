@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package rabbittest;
 
-service ServerService {
+service Server {
     rpc RegisterNode (RegisterNodeRequest) returns (RegisterNodeReply) {}
 }
 
