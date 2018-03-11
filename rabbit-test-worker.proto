@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package rabbittest;
+
+service Worker {
+    rpc CheckStatus(Empty) returns (NodeStatus) {}
+}
+
+message NodeStatus {
+    enum Status {
+        READY = 0;
+        SLEEP = 1;
+        WORKING = 2;
+    }
+    Status status = 1;
+}
+
+message Empty {}
