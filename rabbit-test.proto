@@ -3,13 +3,13 @@ syntax = "proto3";
 package rabbittest;
 
 service Server {
-    rpc RegisterNode(RegisterNodeRequest) returns (RegisterNodeReply) {}
+    rpc RegisterNode(RegisterNodeRequest) returns (RegisterNodeResponse) {}
 }
 
 message RegisterNodeRequest {
     string nodeName = 1;
 }
 
-message RegisterNodeReply {
+message RegisterNodeResponse {
     bool isRegistered = 1;
 }

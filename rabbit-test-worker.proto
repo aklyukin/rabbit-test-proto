@@ -3,10 +3,10 @@ syntax = "proto3";
 package rabbittest;
 
 service Worker {
-    rpc CheckStatus(Empty) returns (NodeStatus) {}
+    rpc CheckStatus(Empty) returns (NodeStatusResponse) {}
 }
 
-message NodeStatus {
+message NodeStatusResponse {
     enum Status {
         READY = 0;
         SLEEP = 1;

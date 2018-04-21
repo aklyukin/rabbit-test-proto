@@ -9,10 +9,10 @@ It is generated from these files:
 	rabbit-test.proto
 
 It has these top-level messages:
-	NodeStatus
+	NodeStatusResponse
 	Empty
 	RegisterNodeRequest
-	RegisterNodeReply
+	RegisterNodeResponse
 */
 package rabbittest
 
@@ -36,44 +36,44 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type NodeStatus_Status int32
+type NodeStatusResponse_Status int32
 
 const (
-	NodeStatus_READY   NodeStatus_Status = 0
-	NodeStatus_SLEEP   NodeStatus_Status = 1
-	NodeStatus_WORKING NodeStatus_Status = 2
+	NodeStatusResponse_READY   NodeStatusResponse_Status = 0
+	NodeStatusResponse_SLEEP   NodeStatusResponse_Status = 1
+	NodeStatusResponse_WORKING NodeStatusResponse_Status = 2
 )
 
-var NodeStatus_Status_name = map[int32]string{
+var NodeStatusResponse_Status_name = map[int32]string{
 	0: "READY",
 	1: "SLEEP",
 	2: "WORKING",
 }
-var NodeStatus_Status_value = map[string]int32{
+var NodeStatusResponse_Status_value = map[string]int32{
 	"READY":   0,
 	"SLEEP":   1,
 	"WORKING": 2,
 }
 
-func (x NodeStatus_Status) String() string {
-	return proto.EnumName(NodeStatus_Status_name, int32(x))
+func (x NodeStatusResponse_Status) String() string {
+	return proto.EnumName(NodeStatusResponse_Status_name, int32(x))
 }
-func (NodeStatus_Status) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0, 0} }
+func (NodeStatusResponse_Status) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0, 0} }
 
-type NodeStatus struct {
-	Status NodeStatus_Status `protobuf:"varint,1,opt,name=status,enum=rabbittest.NodeStatus_Status" json:"status,omitempty"`
+type NodeStatusResponse struct {
+	Status NodeStatusResponse_Status `protobuf:"varint,1,opt,name=status,enum=rabbittest.NodeStatusResponse_Status" json:"status,omitempty"`
 }
 
-func (m *NodeStatus) Reset()                    { *m = NodeStatus{} }
-func (m *NodeStatus) String() string            { return proto.CompactTextString(m) }
-func (*NodeStatus) ProtoMessage()               {}
-func (*NodeStatus) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (m *NodeStatusResponse) Reset()                    { *m = NodeStatusResponse{} }
+func (m *NodeStatusResponse) String() string            { return proto.CompactTextString(m) }
+func (*NodeStatusResponse) ProtoMessage()               {}
+func (*NodeStatusResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-func (m *NodeStatus) GetStatus() NodeStatus_Status {
+func (m *NodeStatusResponse) GetStatus() NodeStatusResponse_Status {
 	if m != nil {
 		return m.Status
 	}
-	return NodeStatus_READY
+	return NodeStatusResponse_READY
 }
 
 type Empty struct {
@@ -85,9 +85,9 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
 func init() {
-	proto.RegisterType((*NodeStatus)(nil), "rabbittest.NodeStatus")
+	proto.RegisterType((*NodeStatusResponse)(nil), "rabbittest.NodeStatusResponse")
 	proto.RegisterType((*Empty)(nil), "rabbittest.Empty")
-	proto.RegisterEnum("rabbittest.NodeStatus_Status", NodeStatus_Status_name, NodeStatus_Status_value)
+	proto.RegisterEnum("rabbittest.NodeStatusResponse_Status", NodeStatusResponse_Status_name, NodeStatusResponse_Status_value)
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -101,7 +101,7 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for Worker service
 
 type WorkerClient interface {
-	CheckStatus(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NodeStatus, error)
+	CheckStatus(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NodeStatusResponse, error)
 }
 
 type workerClient struct {
@@ -112,8 +112,8 @@ func NewWorkerClient(cc *grpc.ClientConn) WorkerClient {
 	return &workerClient{cc}
 }
 
-func (c *workerClient) CheckStatus(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NodeStatus, error) {
-	out := new(NodeStatus)
+func (c *workerClient) CheckStatus(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NodeStatusResponse, error) {
+	out := new(NodeStatusResponse)
 	err := grpc.Invoke(ctx, "/rabbittest.Worker/CheckStatus", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *workerClient) CheckStatus(ctx context.Context, in *Empty, opts ...grpc.
 // Server API for Worker service
 
 type WorkerServer interface {
-	CheckStatus(context.Context, *Empty) (*NodeStatus, error)
+	CheckStatus(context.Context, *Empty) (*NodeStatusResponse, error)
 }
 
 func RegisterWorkerServer(s *grpc.Server, srv WorkerServer) {
@@ -165,17 +165,17 @@ var _Worker_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("rabbit-test-worker.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 178 bytes of a gzipped FileDescriptorProto
+	// 188 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x28, 0x4a, 0x4c, 0x4a,
 	0xca, 0x2c, 0xd1, 0x2d, 0x49, 0x2d, 0x2e, 0xd1, 0x2d, 0xcf, 0x2f, 0xca, 0x4e, 0x2d, 0xd2, 0x2b,
-	0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x82, 0xc8, 0x80, 0x24, 0x94, 0x0a, 0xb8, 0xb8, 0xfc, 0xf2,
-	0x53, 0x52, 0x83, 0x4b, 0x12, 0x4b, 0x4a, 0x8b, 0x85, 0x4c, 0xb9, 0xd8, 0x8a, 0xc1, 0x2c, 0x09,
-	0x46, 0x05, 0x46, 0x0d, 0x3e, 0x23, 0x59, 0x3d, 0x84, 0x52, 0x3d, 0x84, 0x3a, 0x3d, 0x08, 0x15,
-	0x04, 0x55, 0xac, 0xa4, 0xcd, 0xc5, 0x06, 0x35, 0x80, 0x93, 0x8b, 0x35, 0xc8, 0xd5, 0xd1, 0x25,
-	0x52, 0x80, 0x01, 0xc4, 0x0c, 0xf6, 0x71, 0x75, 0x0d, 0x10, 0x60, 0x14, 0xe2, 0xe6, 0x62, 0x0f,
-	0xf7, 0x0f, 0xf2, 0xf6, 0xf4, 0x73, 0x17, 0x60, 0x52, 0x62, 0xe7, 0x62, 0x75, 0xcd, 0x2d, 0x28,
-	0xa9, 0x34, 0x72, 0xe1, 0x62, 0x0b, 0x07, 0x3b, 0x4b, 0xc8, 0x8a, 0x8b, 0xdb, 0x39, 0x23, 0x35,
-	0x39, 0x1b, 0x6a, 0x88, 0x20, 0xb2, 0xad, 0x60, 0xb5, 0x52, 0x62, 0xd8, 0x1d, 0xa2, 0xc4, 0x90,
-	0xc4, 0x06, 0xf6, 0x93, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x87, 0x8b, 0xb0, 0x63, 0xef, 0x00,
-	0x00, 0x00,
+	0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x82, 0xc8, 0x80, 0x24, 0x94, 0x1a, 0x18, 0xb9, 0x84, 0xfc,
+	0xf2, 0x53, 0x52, 0x83, 0x4b, 0x12, 0x4b, 0x4a, 0x8b, 0x83, 0x52, 0x8b, 0x0b, 0xf2, 0xf3, 0x8a,
+	0x53, 0x85, 0x6c, 0xb9, 0xd8, 0x8a, 0xc1, 0x22, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x7c, 0x46, 0xaa,
+	0x7a, 0x08, 0x3d, 0x7a, 0x98, 0xea, 0xf5, 0xa0, 0x5c, 0xa8, 0x26, 0x25, 0x6d, 0x2e, 0x36, 0x88,
+	0x88, 0x10, 0x27, 0x17, 0x6b, 0x90, 0xab, 0xa3, 0x4b, 0xa4, 0x00, 0x03, 0x88, 0x19, 0xec, 0xe3,
+	0xea, 0x1a, 0x20, 0xc0, 0x28, 0xc4, 0xcd, 0xc5, 0x1e, 0xee, 0x1f, 0xe4, 0xed, 0xe9, 0xe7, 0x2e,
+	0xc0, 0xa4, 0xc4, 0xce, 0xc5, 0xea, 0x9a, 0x5b, 0x50, 0x52, 0x69, 0xe4, 0xc3, 0xc5, 0x16, 0x0e,
+	0x76, 0xa7, 0x90, 0x13, 0x17, 0xb7, 0x73, 0x46, 0x6a, 0x72, 0x36, 0xd4, 0x10, 0x41, 0x64, 0xdb,
+	0xc1, 0x6a, 0xa5, 0xe4, 0xf0, 0x3b, 0x48, 0x89, 0x21, 0x89, 0x0d, 0xec, 0x59, 0x63, 0x40, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0xbe, 0x65, 0x72, 0x17, 0x08, 0x01, 0x00, 0x00,
 }
