@@ -4,6 +4,7 @@ package rabbittest;
 
 service Server {
     rpc RegisterNode(RegisterNodeRequest) returns (RegisterNodeResponse) {}
+    rpc PingServer(Ping) returns (Pong) {}
 }
 
 message RegisterNodeRequest {
@@ -12,4 +13,12 @@ message RegisterNodeRequest {
 
 message RegisterNodeResponse {
     bool isRegistered = 1;
+}
+
+message Ping {
+    string nodeName = 1;
+}
+
+message Pong {
+    string serverName = 1;
 }

@@ -13,6 +13,8 @@ It has these top-level messages:
 	Empty
 	RegisterNodeRequest
 	RegisterNodeResponse
+	Ping
+	Pong
 */
 package rabbittest
 
