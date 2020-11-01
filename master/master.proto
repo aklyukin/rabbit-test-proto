@@ -1,6 +1,7 @@
 syntax = "proto3";
 
-package rabbittest;
+package master;
+option go_package = "master";
 
 service Server {
     rpc RegisterNode(RegisterNodeRequest) returns (RegisterNodeResponse) {}
