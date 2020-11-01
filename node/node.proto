@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 package node;
-option go_package = "node";
 
 service Node {
     rpc CheckStatus(Empty) returns (NodeStatusResponse) {}

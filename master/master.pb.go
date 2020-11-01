@@ -192,7 +192,7 @@ func init() {
 }
 
 var fileDescriptor_3e524a825add940c = []byte{
-	// 207 bytes of a gzipped FileDescriptorProto
+	// 205 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0xce, 0x4d, 0x2c, 0x2e,
 	0x49, 0x2d, 0xd2, 0x87, 0x50, 0x7a, 0x05, 0x45, 0xf9, 0x25, 0xf9, 0x42, 0x6c, 0x10, 0x9e, 0x92,
 	0x21, 0x97, 0x70, 0x50, 0x6a, 0x7a, 0x26, 0x88, 0xed, 0x97, 0x9f, 0x92, 0x1a, 0x94, 0x5a, 0x58,
@@ -201,11 +201,11 @@ var fileDescriptor_3e524a825add940c = []byte{
 	0xc8, 0xcf, 0x2b, 0x4e, 0x15, 0x52, 0xe2, 0xe2, 0xc9, 0x2c, 0x86, 0xc9, 0xa4, 0xa6, 0x80, 0xf5,
 	0x71, 0x04, 0xa1, 0x88, 0x29, 0x29, 0x71, 0xb1, 0x04, 0x64, 0xe6, 0xa5, 0xe3, 0x35, 0x5f, 0x8d,
 	0x8b, 0x25, 0x20, 0x3f, 0x2f, 0x5d, 0x48, 0x8e, 0x8b, 0xab, 0x38, 0xb5, 0xa8, 0x2c, 0xb5, 0x08,
-	0x49, 0x15, 0x92, 0x88, 0x51, 0x23, 0x23, 0x17, 0x5b, 0x30, 0x98, 0x2b, 0xe4, 0xcd, 0xc5, 0x83,
-	0xec, 0x24, 0x21, 0x69, 0x3d, 0xa8, 0x67, 0xb1, 0xf8, 0x4d, 0x4a, 0x06, 0xbb, 0x24, 0xc4, 0x17,
-	0x4a, 0x0c, 0x42, 0x5a, 0x5c, 0x5c, 0x20, 0x37, 0x42, 0x8d, 0xe6, 0x81, 0xa9, 0x06, 0x89, 0x49,
-	0x21, 0x78, 0xf9, 0x79, 0xe9, 0x4a, 0x0c, 0x4e, 0x1c, 0x51, 0xd0, 0x80, 0x4c, 0x62, 0x03, 0x87,
-	0xab, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xde, 0x0d, 0x9a, 0x4a, 0x6e, 0x01, 0x00, 0x00,
+	0x49, 0x15, 0x92, 0x88, 0x51, 0x23, 0x23, 0x17, 0x9b, 0x2f, 0xd8, 0x17, 0x42, 0xde, 0x5c, 0x3c,
+	0xc8, 0x4e, 0x12, 0x92, 0xd6, 0x83, 0x7a, 0x16, 0x8b, 0xdf, 0xa4, 0x64, 0xb0, 0x4b, 0x42, 0x7c,
+	0xa1, 0xc4, 0x20, 0xa4, 0xc5, 0xc5, 0x05, 0x72, 0x63, 0x30, 0xd8, 0x26, 0x21, 0x1e, 0x98, 0x6a,
+	0x90, 0x98, 0x14, 0x82, 0x97, 0x9f, 0x97, 0xae, 0xc4, 0x90, 0xc4, 0x06, 0x0e, 0x4d, 0x63, 0x40,
+	0x00, 0x00, 0x00, 0xff, 0xff, 0x01, 0xdf, 0x7b, 0xf5, 0x64, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -216,108 +216,108 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// ServerClient is the client API for Server service.
+// MasterClient is the client API for Master service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ServerClient interface {
+type MasterClient interface {
 	RegisterNode(ctx context.Context, in *RegisterNodeRequest, opts ...grpc.CallOption) (*RegisterNodeResponse, error)
 	PingServer(ctx context.Context, in *Ping, opts ...grpc.CallOption) (*Pong, error)
 }
 
-type serverClient struct {
+type masterClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewServerClient(cc grpc.ClientConnInterface) ServerClient {
-	return &serverClient{cc}
+func NewMasterClient(cc grpc.ClientConnInterface) MasterClient {
+	return &masterClient{cc}
 }
 
-func (c *serverClient) RegisterNode(ctx context.Context, in *RegisterNodeRequest, opts ...grpc.CallOption) (*RegisterNodeResponse, error) {
+func (c *masterClient) RegisterNode(ctx context.Context, in *RegisterNodeRequest, opts ...grpc.CallOption) (*RegisterNodeResponse, error) {
 	out := new(RegisterNodeResponse)
-	err := c.cc.Invoke(ctx, "/master.Server/RegisterNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/master.Master/RegisterNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serverClient) PingServer(ctx context.Context, in *Ping, opts ...grpc.CallOption) (*Pong, error) {
+func (c *masterClient) PingServer(ctx context.Context, in *Ping, opts ...grpc.CallOption) (*Pong, error) {
 	out := new(Pong)
-	err := c.cc.Invoke(ctx, "/master.Server/PingServer", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/master.Master/PingServer", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ServerServer is the server API for Server service.
-type ServerServer interface {
+// MasterServer is the server API for Master service.
+type MasterServer interface {
 	RegisterNode(context.Context, *RegisterNodeRequest) (*RegisterNodeResponse, error)
 	PingServer(context.Context, *Ping) (*Pong, error)
 }
 
-// UnimplementedServerServer can be embedded to have forward compatible implementations.
-type UnimplementedServerServer struct {
+// UnimplementedMasterServer can be embedded to have forward compatible implementations.
+type UnimplementedMasterServer struct {
 }
 
-func (*UnimplementedServerServer) RegisterNode(ctx context.Context, req *RegisterNodeRequest) (*RegisterNodeResponse, error) {
+func (*UnimplementedMasterServer) RegisterNode(ctx context.Context, req *RegisterNodeRequest) (*RegisterNodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterNode not implemented")
 }
-func (*UnimplementedServerServer) PingServer(ctx context.Context, req *Ping) (*Pong, error) {
+func (*UnimplementedMasterServer) PingServer(ctx context.Context, req *Ping) (*Pong, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PingServer not implemented")
 }
 
-func RegisterServerServer(s *grpc.Server, srv ServerServer) {
-	s.RegisterService(&_Server_serviceDesc, srv)
+func RegisterMasterServer(s *grpc.Server, srv MasterServer) {
+	s.RegisterService(&_Master_serviceDesc, srv)
 }
 
-func _Server_RegisterNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Master_RegisterNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterNodeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServerServer).RegisterNode(ctx, in)
+		return srv.(MasterServer).RegisterNode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/master.Server/RegisterNode",
+		FullMethod: "/master.Master/RegisterNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServer).RegisterNode(ctx, req.(*RegisterNodeRequest))
+		return srv.(MasterServer).RegisterNode(ctx, req.(*RegisterNodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Server_PingServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Master_PingServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ping)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServerServer).PingServer(ctx, in)
+		return srv.(MasterServer).PingServer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/master.Server/PingServer",
+		FullMethod: "/master.Master/PingServer",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServer).PingServer(ctx, req.(*Ping))
+		return srv.(MasterServer).PingServer(ctx, req.(*Ping))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Server_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "master.Server",
-	HandlerType: (*ServerServer)(nil),
+var _Master_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "master.Master",
+	HandlerType: (*MasterServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "RegisterNode",
-			Handler:    _Server_RegisterNode_Handler,
+			Handler:    _Master_RegisterNode_Handler,
 		},
 		{
 			MethodName: "PingServer",
-			Handler:    _Server_PingServer_Handler,
+			Handler:    _Master_PingServer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

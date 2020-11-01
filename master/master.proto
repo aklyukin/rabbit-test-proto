@@ -1,9 +1,8 @@
 syntax = "proto3";
 
 package master;
-option go_package = "master";
 
-service Server {
+service Master {
     rpc RegisterNode(RegisterNodeRequest) returns (RegisterNodeResponse) {}
     rpc PingServer(Ping) returns (Pong) {}
 }
